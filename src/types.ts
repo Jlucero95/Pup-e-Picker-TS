@@ -6,3 +6,24 @@ export type Dog = {
 	isFavorite: boolean;
 	name: string;
 };
+
+export type DogAndActionData = {
+	dogs: Dog[];
+	isTrashClicked: ({ isTrashClicked }: { isTrashClicked: boolean }) => void;
+	isHeartClicked: ({ isHeartClicked }: { isHeartClicked: boolean }) => void;
+	isEmptyHeartClicked: ({
+		isEmptyHeartClicked,
+	}: {
+		isEmptyHeartClicked: boolean;
+	}) => void;
+	isLoading: boolean;
+};
+
+export type FavAndDogData = {
+	activeTab: ActiveTab;
+	allDogs: Dog[];
+	favDogs: Dog[];
+	unFavDogs: Dog[];
+};
+
+export type ActiveTab = "favourite" | "unFavourite" | "create" | "none";

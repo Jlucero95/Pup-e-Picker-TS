@@ -1,93 +1,78 @@
-import { DogCard } from "../Shared/DogCard";
 import { Component } from "react";
-import { dogPictures } from "../dog-pictures";
+import { Dog } from "../types";
+import { Requests } from "../api";
+import { getSelectedDogs } from "../Shared/GetSelectedDogs";
+import { showSelectedDogsList } from "../Shared/ShowSelectedDogsList";
 
 // Right now these dogs are constant, but in reality we should be getting these from our server
-export class ClassDogs extends Component {
-  render() {
-    return (
-      <>
-        <DogCard
-          dog={{
-            id: 1,
-            image: dogPictures.BlueHeeler,
-            description: "Example Description",
-            isFavorite: false,
-            name: "Cute Blue Heeler",
-          }}
-          key={1}
-          onTrashIconClick={() => {
-            alert("clicked trash");
-          }}
-          onHeartClick={() => {
-            alert("clicked heart");
-          }}
-          onEmptyHeartClick={() => {
-            alert("clicked empty heart");
-          }}
-          isLoading={false}
-        />
-        <DogCard
-          dog={{
-            id: 2,
-            image: dogPictures.Boxer,
-            description: "Example Description",
-            isFavorite: false,
-            name: "Cute Boxer",
-          }}
-          key={2}
-          onTrashIconClick={() => {
-            alert("clicked trash");
-          }}
-          onHeartClick={() => {
-            alert("clicked heart");
-          }}
-          onEmptyHeartClick={() => {
-            alert("clicked empty heart");
-          }}
-          isLoading={false}
-        />
-        <DogCard
-          dog={{
-            id: 3,
-            image: dogPictures.Chihuahua,
-            description: "Example Description",
-            isFavorite: false,
-            name: "Cute Chihuahua",
-          }}
-          key={3}
-          onTrashIconClick={() => {
-            alert("clicked trash");
-          }}
-          onHeartClick={() => {
-            alert("clicked heart");
-          }}
-          onEmptyHeartClick={() => {
-            alert("clicked empty heart");
-          }}
-          isLoading={false}
-        />
-        <DogCard
-          dog={{
-            id: 4,
-            image: dogPictures.Corgi,
-            description: "Example Description",
-            isFavorite: false,
-            name: "Cute Corgi",
-          }}
-          key={4}
-          onTrashIconClick={() => {
-            alert("clicked trash");
-          }}
-          onHeartClick={() => {
-            alert("clicked heart");
-          }}
-          onEmptyHeartClick={() => {
-            alert("clicked empty heart");
-          }}
-          isLoading={false}
-        />
-      </>
-    );
-  }
+export class ClassDogs extends Component<{
+	favCount: (favCount: number) => void;
+	unFavCount: (unFavCount: number) => void;
+}> {
+	state = {
+		allDogs: [],
+		favDogs: [],
+		unFavDogs: [],
+		isCardLoading: false,
+	};
+	componentDidMount() {
+		this.refetchDogs();
+	}
+
+	refetchDogs = () => {
+		const favArr: Dog[] = [];
+		const unFavArr: Dog[] = [];
+		Requests.getAllDogs()
+			.then((dogs: Dog[]) => {
+				this.setState({ allDogs: dogs });
+				dogs.map((dog: Dog) => {
+					if (dog.isFavorite) {
+						favArr.push(dog);
+						this.setState({ favDogs: favArr });
+					} else if (!dog.isFavorite) {
+						unFavArr.push(dog);
+						this.setState({ unFavDogs: unFavArr });
+					}
+				});
+			})
+			.finally(() => {
+				this.props.favCount(favArr.length);
+				this.props.unFavCount(unFavArr.length);
+				this.setState({ isCardLoading: false });
+			});
+	};
+
+	render() {
+		const { allDogs, favDogs, unFavDogs, isCardLoading } = this.state;
+		const selectedDogs = getSelectedDogs({
+			favAndDogData: {
+				allDogs,
+				favDogs,
+				unFavDogs,
+				activeTab: "none",
+			},
+		});
+		return (
+			<>
+				{showSelectedDogsList({
+					dogAndActionData: {
+						dogs: selectedDogs,
+						isTrashClicked: () => {
+							this.setState({ isCardLoading: true });
+							this.refetchDogs();
+						},
+						isEmptyHeartClicked: () => {
+							this.setState({ isCardLoading: true });
+							this.refetchDogs();
+						},
+						isHeartClicked: () => {
+							this.setState({ isCardLoading: true });
+							this.refetchDogs();
+						},
+						isLoading: isCardLoading,
+					},
+				})}
+			</>
+		);
+	}
 }
