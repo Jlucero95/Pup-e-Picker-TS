@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { ClassSectionProps } from "./ClassTypes";
 import { SectionSelector } from "../Shared/Selectors";
 import { ActiveTab } from "../types";
+type ClassSectionState = { activeTabState: ActiveTab };
 
 export class ClassSection extends Component<ClassSectionProps> {
-	handleTabClick = (tab: ActiveTab) => {
-		this.props.activeTab(tab);
+	state: ClassSectionState = {
+		activeTabState: "none",
 	};
+
 	render() {
+		const { activeTabState } = this.state;
 		const { children, favCount, unFavCount } = this.props;
 		return (
 			<section id="main-section">
@@ -25,21 +28,47 @@ export class ClassSection extends Component<ClassSectionProps> {
 
 					<div className="selectors">
 						<SectionSelector
-							activeClass=""
+							activeClass={activeTabState === "favourite" ? "active" : ""}
 							count={favCount}
-							onClick={() => {}}
+							onClick={() => {
+								if (activeTabState !== "favourite") {
+									this.setState({ activeTabState: "favourite" });
+									this.props.activeTab("favourite");
+								} else {
+									this.setState({ activeTabState: "none" });
+									this.props.activeTab("none");
+								}
+							}}
 							section="favorited"
 						/>
 
 						<SectionSelector
 							section="unfavorited"
-							activeClass={""}
+							activeClass={activeTabState === "unFavourite" ? "active" : ""}
 							count={unFavCount}
-							onClick={() => {}}
+							onClick={() => {
+								if (activeTabState !== "unFavourite") {
+									this.setState({ activeTabState: "unFavourite" });
+									this.props.activeTab("unFavourite");
+								} else {
+									this.setState({ activeTabState: "none" });
+									this.props.activeTab("none");
+								}
+							}}
 						/>
 						<div
-							className="selector"
-							onClick={() => {}}
+							className={`selector ${
+								activeTabState === "create" ? "active" : ""
+							}`}
+							onClick={() => {
+								if (activeTabState !== "create") {
+									this.setState({ activeTabState: "create" });
+									this.props.activeTab("create");
+								} else {
+									this.setState({ activeTabState: "none" });
+									this.props.activeTab("none");
+								}
+							}}
 						>
 							create dog
 						</div>

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Dog } from "../types";
+import { ActiveTab, Dog } from "../types";
 import { Requests } from "../api";
 import { getSelectedDogs } from "../Shared/GetSelectedDogs";
 import { showSelectedDogsList } from "../Shared/ShowSelectedDogsList";
@@ -8,6 +8,7 @@ import { showSelectedDogsList } from "../Shared/ShowSelectedDogsList";
 export class ClassDogs extends Component<{
 	favCount: (favCount: number) => void;
 	unFavCount: (unFavCount: number) => void;
+	activeTab: ActiveTab;
 }> {
 	state = {
 		allDogs: [],
@@ -15,6 +16,7 @@ export class ClassDogs extends Component<{
 		unFavDogs: [],
 		isCardLoading: false,
 	};
+
 	componentDidMount() {
 		this.refetchDogs();
 	}
@@ -43,15 +45,18 @@ export class ClassDogs extends Component<{
 	};
 
 	render() {
+		const { activeTab } = this.props;
 		const { allDogs, favDogs, unFavDogs, isCardLoading } = this.state;
+
 		const selectedDogs = getSelectedDogs({
 			favAndDogData: {
 				allDogs,
 				favDogs,
 				unFavDogs,
-				activeTab: "none",
+				activeTab,
 			},
 		});
+
 		return (
 			<>
 				{showSelectedDogsList({

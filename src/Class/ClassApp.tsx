@@ -2,16 +2,24 @@ import { Component } from "react";
 import { ClassSection } from "./ClassSection";
 import { ClassDogs } from "./ClassDogs";
 import { ActiveTab } from "../types";
+import { ClassCreateDogForm } from "./ClassCreateDogForm";
 // import { ClassCreateDogForm } from "./ClassCreateDogForm";
 
+export type ClassAppState = {
+	activeTab: ActiveTab;
+	favCount: number;
+	unFavCount: number;
+};
+
 export class ClassApp extends Component<Record<string, never>> {
-	state = {
+	state: ClassAppState = {
 		activeTab: "none",
 		favCount: 0,
 		unFavCount: 0,
 	};
+
 	render() {
-		const { favCount, unFavCount } = this.state;
+		const { favCount, unFavCount, activeTab } = this.state;
 		return (
 			<div
 				className="App"
@@ -27,18 +35,22 @@ export class ClassApp extends Component<Record<string, never>> {
 					favCount={favCount}
 					unFavCount={unFavCount}
 				>
-					<ClassDogs
-						favCount={(count) => {
-							this.setState({ favCount: count });
-						}}
-						unFavCount={(count) => {
-							this.setState({ unFavCount: count });
-						}}
-					/>
+					{activeTab === "none" ||
+					activeTab === "favourite" ||
+					activeTab === "unFavourite" ? (
+						<ClassDogs
+							favCount={(count) => {
+								this.setState({ favCount: count });
+							}}
+							unFavCount={(count) => {
+								this.setState({ unFavCount: count });
+							}}
+							activeTab={activeTab}
+						/>
+					) : (
+						<ClassCreateDogForm />
+					)}
 				</ClassSection>
-
-				{/* should be inside of the ClassSection component using react children */}
-				{/* <ClassCreateDogForm /> */}
 			</div>
 		);
 	}
