@@ -27,3 +27,9 @@ export type FavAndDogData = {
 };
 
 export type ActiveTab = "favourite" | "unFavourite" | "create" | "none";
+
+export type FavAndUnFavData = {
+	activeTab: ActiveTab;
+	favCount: (favCount: number) => void;
+	unFavCount: (unFavCount: number) => void;
+};
