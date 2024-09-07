@@ -19,7 +19,7 @@ export function FunctionalApp() {
 				<h1>pup-e-picker (Functional)</h1>
 			</header>
 			<FunctionalSection
-				functionalSectionProps={{
+				tabSelectorInformation={{
 					activeTab(activeTab) {
 						setActiveTab(activeTab);
 					},
@@ -33,7 +33,7 @@ export function FunctionalApp() {
 				  activeTab === "unFavourite" ||
 				  activeTab === "none" ? (
 					<FunctionalDogs
-						favAndUnFavData={{
+						tabSelectorInformation={{
 							activeTab: activeTab,
 							favCount: (favCount: number) => {
 								setFavCount(favCount);

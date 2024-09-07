@@ -1,24 +1,18 @@
 // you can use this type for react children if you so choose
 import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
-import { ActiveTab } from "../types";
-
-export type FunctionalSectionProps = {
-	activeTab: (activeTab: ActiveTab) => void;
-	favCount: number;
-	unFavCount: number;
-};
+import { ActiveTab, TabSelection as TabSelectorInformation } from "../types";
 
 export const FunctionalSection = ({
-	functionalSectionProps,
+	tabSelectorInformation,
 	children,
 }: {
-	functionalSectionProps: FunctionalSectionProps;
+	tabSelectorInformation: TabSelectorInformation;
 	children: ReactNode;
 }) => {
 	const [activeTabState, setActiveTabState] = useState<ActiveTab>("none");
 
-	const { activeTab, favCount, unFavCount } = functionalSectionProps;
+	const { activeTab, favCount, unFavCount } = tabSelectorInformation;
 
 	const handleTabClick = (tab: ActiveTab) => {
 		if (activeTabState !== tab) {
@@ -41,7 +35,6 @@ export const FunctionalSection = ({
 					Change to Class
 				</Link>
 				<div className="selectors">
-					{/* This should display the favorited count */}
 					<div
 						className={`selector ${
 							activeTabState === "favourite" ? "active" : ""
@@ -50,10 +43,9 @@ export const FunctionalSection = ({
 							handleTabClick("favourite");
 						}}
 					>
-						favorited ( {favCount} )
+						favorited ({favCount})
 					</div>
 
-					{/* This should display the unfavorited count */}
 					<div
 						className={`selector  ${
 							activeTabState === "unFavourite" ? "active" : ""
@@ -62,8 +54,9 @@ export const FunctionalSection = ({
 							handleTabClick("unFavourite");
 						}}
 					>
-						unfavorited ( {unFavCount} )
+						unfavorited ({unFavCount})
 					</div>
+
 					<div
 						className={`selector ${
 							activeTabState === "create" ? "active" : ""

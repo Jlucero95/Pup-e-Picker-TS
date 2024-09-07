@@ -3,7 +3,6 @@ import { ClassSection } from "./ClassSection";
 import { ClassDogs } from "./ClassDogs";
 import { ActiveTab } from "../types";
 import { ClassCreateDogForm } from "./ClassCreateDogForm";
-// import { ClassCreateDogForm } from "./ClassCreateDogForm";
 
 export type ClassAppState = {
 	activeTab: ActiveTab;

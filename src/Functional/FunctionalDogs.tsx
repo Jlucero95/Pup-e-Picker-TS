@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { Dog, FavAndUnFavData } from "../types";
+import { Dog, TabSelectorInformation } from "../types";
 import { Requests } from "../api";
 import { getSelectedDogs } from "../Shared/GetSelectedDogs";
 import { showSelectedDogsList } from "../Shared/ShowSelectedDogsList";
 
-// Right now these dogs are constant, but in reality we should be getting these from our server
 export const FunctionalDogs = ({
-	favAndUnFavData,
+	tabSelectorInformation,
 }: {
-	favAndUnFavData: FavAndUnFavData;
+	tabSelectorInformation: TabSelectorInformation;
 }) => {
 	const [allDogs, setAllDogs] = useState<Dog[]>([]);
 	const [favDogs, setFavDogs] = useState<Dog[]>([]);
@@ -16,13 +15,14 @@ export const FunctionalDogs = ({
 	useState<boolean>(false);
 	const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
 
-	const { favCount, unFavCount, activeTab } = favAndUnFavData;
+	const { favCount, unFavCount, activeTab } = tabSelectorInformation;
 
 	useEffect(() => {
 		refetchDogs();
 	}, []);
 
 	const refetchDogs = () => {
+		setIsCardLoading(true);
 		const favArr: Dog[] = [];
 		const unFavArr: Dog[] = [];
 
@@ -54,6 +54,7 @@ export const FunctionalDogs = ({
 			unFavDogs: unFavDogs,
 		},
 	});
+
 	return (
 		//  the "<> </>"" are called react fragments, it's like adding all the html inside
 		// without adding an actual html element
@@ -62,15 +63,12 @@ export const FunctionalDogs = ({
 				dogAndActionData: {
 					dogs: selectedDogs,
 					isTrashClicked() {
-						setIsCardLoading(true);
 						refetchDogs();
 					},
 					isHeartClicked() {
-						setIsCardLoading(true);
 						refetchDogs();
 					},
 					isEmptyHeartClicked() {
-						setIsCardLoading(true);
 						refetchDogs();
 					},
 
