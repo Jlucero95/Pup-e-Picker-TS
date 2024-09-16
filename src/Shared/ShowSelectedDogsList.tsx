@@ -35,7 +35,7 @@ export const showDogs = ({
 			onHeartClick={() => {
 				Requests.updateDog({ dog: dog }).then(() => {
 					isHeartClicked({ isHeartClicked: true });
-					toast.success(`un-favorited ${dog.name}`);
+					toast.success(`un-favorited ${dog.name} `);
 				});
 			}}
 			onEmptyHeartClick={() => {
