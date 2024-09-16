@@ -1,16 +1,15 @@
-// you can use `ReactNode` to add a type to the children prop
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { ClassSectionProps } from "./ClassTypes";
+import { TabAndCountInformation } from "./ClassTypes";
 import { SectionSelector } from "../Shared/Selectors";
 import { ActiveTab } from "../types";
 
 
 
-type ClassSectionState = { activeTab: ActiveTab };
+type State = { activeTab: ActiveTab };
 
-export class ClassSection extends Component<ClassSectionProps> {
-	state: ClassSectionState = {
+export class ClassSection extends Component<TabAndCountInformation> {
+	state: State = {
 		activeTab: "none",
 	};
 

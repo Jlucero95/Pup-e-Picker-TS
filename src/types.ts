@@ -1,4 +1,3 @@
-// Add your own custom types in here
 export type Dog = {
 	id: string;
 	image: string;
@@ -7,7 +6,7 @@ export type Dog = {
 	name: string;
 };
 
-export type DogAndActionData = {
+export type DogAndActionInformation = {
 	dogs: Dog[];
 	isTrashClicked: ({ isTrashClicked }: { isTrashClicked: boolean }) => void;
 	isHeartClicked: ({ isHeartClicked }: { isHeartClicked: boolean }) => void;
@@ -19,7 +18,7 @@ export type DogAndActionData = {
 	isLoading: boolean;
 };
 
-export type FavAndDogData = {
+export type DogAndTabInformation = {
 	activeTab: ActiveTab;
 	allDogs: Dog[];
 	favDogs: Dog[];
@@ -28,13 +27,13 @@ export type FavAndDogData = {
 
 export type ActiveTab = "favourite" | "unFavourite" | "create" | "none";
 
-export type TabSelectorInformation = {
+export type ActiveTabAndSetCount = {
 	activeTab: ActiveTab;
 	favCount: (favCount: number) => void;
 	unFavCount: (unFavCount: number) => void;
 };
 
-export type TabSelection = {
+export type CountAndSetActiveTab = {
 	activeTab: (activeTab: ActiveTab) => void;
 	favCount: number;
 	unFavCount: number;

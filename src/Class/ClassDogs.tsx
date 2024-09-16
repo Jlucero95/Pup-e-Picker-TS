@@ -1,14 +1,12 @@
 import { Component } from "react";
-import { ActiveTab, Dog } from "../types";
+import { ActiveTabAndSetCount, Dog } from "../types";
 import { Requests } from "../api";
 import { getSelectedDogs } from "../Shared/GetSelectedDogs";
-import { showSelectedDogsList } from "../Shared/ShowSelectedDogsList";
+import { showDogs } from "../Shared/ShowSelectedDogsList";
 
 // Right now these dogs are constant, but in reality we should be getting these from our server
 export class ClassDogs extends Component<{
-	favCount: (favCount: number) => void;
-	unFavCount: (unFavCount: number) => void;
-	activeTab: ActiveTab;
+	activeTabAndSetCount: ActiveTabAndSetCount;
 }> {
 	state = {
 		allDogs: [],
@@ -38,14 +36,14 @@ export class ClassDogs extends Component<{
 				});
 			})
 			.finally(() => {
-				this.props.favCount(favArr.length);
-				this.props.unFavCount(unFavArr.length);
+				this.props.activeTabAndSetCount.favCount(favArr.length);
+				this.props.activeTabAndSetCount.unFavCount(unFavArr.length);
 				this.setState({ isCardLoading: false });
 			});
 	};
 
 	render() {
-		const { activeTab } = this.props;
+		const { activeTab } = this.props.activeTabAndSetCount;
 		const { allDogs, favDogs, unFavDogs, isCardLoading } = this.state;
 
 		const selectedDogs = getSelectedDogs({
@@ -59,8 +57,8 @@ export class ClassDogs extends Component<{
 
 		return (
 			<>
-				{showSelectedDogsList({
-					dogAndActionData: {
+				{showDogs({
+					dogAndActionInformation: {
 						dogs: selectedDogs,
 						isTrashClicked: () => {
 							this.setState({ isCardLoading: true });
@@ -75,7 +73,7 @@ export class ClassDogs extends Component<{
 							this.refetchDogs();
 						},
 						isLoading: isCardLoading,
-					},
+					}
 				})}
 			</>
 		);

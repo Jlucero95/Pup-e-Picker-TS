@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { Dog, TabSelectorInformation } from "../types";
+import { Dog, ActiveTabAndSetCount } from "../types";
 import { Requests } from "../api";
 import { getSelectedDogs } from "../Shared/GetSelectedDogs";
-import { showSelectedDogsList } from "../Shared/ShowSelectedDogsList";
+import { showDogs } from "../Shared/ShowSelectedDogsList";
 
 export const FunctionalDogs = ({
-	tabSelectorInformation,
+	activeTabAndSetCount,
 }: {
-	tabSelectorInformation: TabSelectorInformation;
+	activeTabAndSetCount: ActiveTabAndSetCount;
 }) => {
 	const [allDogs, setAllDogs] = useState<Dog[]>([]);
 	const [favDogs, setFavDogs] = useState<Dog[]>([]);
@@ -15,7 +15,7 @@ export const FunctionalDogs = ({
 	useState<boolean>(false);
 	const [isCardLoading, setIsCardLoading] = useState<boolean>(false);
 
-	const { favCount, unFavCount, activeTab } = tabSelectorInformation;
+	const { favCount, unFavCount, activeTab } = activeTabAndSetCount;
 
 	useEffect(() => {
 		refetchDogs();
@@ -59,8 +59,8 @@ export const FunctionalDogs = ({
 		//  the "<> </>"" are called react fragments, it's like adding all the html inside
 		// without adding an actual html element
 		<>
-			{showSelectedDogsList({
-				dogAndActionData: {
+			{showDogs({
+				dogAndActionInformation: {
 					dogs: selectedDogs,
 					isTrashClicked() {
 						refetchDogs();

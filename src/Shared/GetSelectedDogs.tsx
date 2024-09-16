@@ -1,9 +1,9 @@
-import { FavAndDogData } from "../types";
+import { DogAndTabInformation } from "../types";
 
 export const getSelectedDogs = ({
 	favAndDogData,
 }: {
-	favAndDogData: FavAndDogData;
+	favAndDogData: DogAndTabInformation;
 }) => {
 	const { activeTab, favDogs, unFavDogs, allDogs } = favAndDogData;
 

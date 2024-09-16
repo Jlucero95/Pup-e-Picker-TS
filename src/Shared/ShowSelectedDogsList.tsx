@@ -1,12 +1,12 @@
 import { DogCard } from "./DogCard";
 import { Requests } from "../api";
-import { Dog, DogAndActionData } from "../types";
+import { Dog, DogAndActionInformation } from "../types";
 import toast from "react-hot-toast";
 
-export const showSelectedDogsList = ({
-	dogAndActionData,
+export const showDogs = ({
+	dogAndActionInformation,
 }: {
-	dogAndActionData: DogAndActionData;
+	dogAndActionInformation: DogAndActionInformation;
 }) => {
 	const {
 		dogs,
@@ -14,7 +14,7 @@ export const showSelectedDogsList = ({
 		isHeartClicked,
 		isEmptyHeartClicked,
 		isLoading,
-	} = dogAndActionData;
+	} = dogAndActionInformation;
 
 	return dogs.map((dog: Dog) => (
 		<DogCard

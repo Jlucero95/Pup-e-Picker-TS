@@ -1,18 +1,18 @@
 // you can use this type for react children if you so choose
 import { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
-import { ActiveTab, TabSelection as TabSelectorInformation } from "../types";
+import { ActiveTab, CountAndSetActiveTab } from "../types";
 
 export const FunctionalSection = ({
-	tabSelection,
+	countAndSetActiveTab,
 	children,
 }: {
-	tabSelection: TabSelectorInformation;
+	countAndSetActiveTab: CountAndSetActiveTab;
 	children: ReactNode;
 }) => {
 	const [activeTabState, setActiveTabState] = useState<ActiveTab>("none");
 
-	const { activeTab, favCount, unFavCount } = tabSelection;
+	const { activeTab, favCount, unFavCount } = countAndSetActiveTab;
 
 	const handleTabClick = (tab: ActiveTab) => {
 		if (activeTabState !== tab) {
@@ -70,6 +70,7 @@ export const FunctionalSection = ({
 				</div>
 			</div>
 			<div className="content-container">{children}</div>
+
 		</section>
 	);
 };

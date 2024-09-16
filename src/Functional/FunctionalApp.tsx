@@ -19,7 +19,7 @@ export function FunctionalApp() {
 				<h1>pup-e-picker (Functional)</h1>
 			</header>
 			<FunctionalSection
-				tabSelection={{
+				countAndSetActiveTab={{
 					activeTab(activeTab) {
 						setActiveTab(activeTab);
 					},
@@ -28,12 +28,12 @@ export function FunctionalApp() {
 				}}
 			>
 				{activeTab === "create" ? (
-					<FunctionalCreateDogForm />
+					<FunctionalCreateDogForm /> 
 				) : activeTab === "favourite" ||
 				  activeTab === "unFavourite" ||
 				  activeTab === "none" ? (
 					<FunctionalDogs
-						tabSelectorInformation={{
+						activeTabAndSetCount={{
 							activeTab: activeTab,
 							favCount: (favCount: number) => {
 								setFavCount(favCount);

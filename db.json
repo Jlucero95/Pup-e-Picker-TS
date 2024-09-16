@@ -53,7 +53,7 @@
       "name": "Imani",
       "image": "/assets/dalmation.png",
       "description": "rattle excluding skean on recovery",
-      "isFavorite": true,
+      "isFavorite": false,
       "id": 7
     },
     {
@@ -74,7 +74,7 @@
       "name": "Tyson",
       "image": "/assets/blue-heeler.png",
       "description": "inequality maroon however nimble segregate",
-      "isFavorite": false,
+      "isFavorite": true,
       "id": 10
     },
     {
