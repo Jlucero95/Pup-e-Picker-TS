@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import { ClassSectionProps } from "./ClassTypes";
 import { SectionSelector } from "../Shared/Selectors";
 import { ActiveTab } from "../types";
-type ClassSectionState = { activeTabState: ActiveTab };
+
+
+
+type ClassSectionState = { activeTab: ActiveTab };
 
 export class ClassSection extends Component<ClassSectionProps> {
 	state: ClassSectionState = {
-		activeTabState: "none",
+		activeTab: "none",
 	};
 
 	render() {
-		const { activeTabState } = this.state;
+		const { activeTab } = this.state;
 		const { children, favCount, unFavCount } = this.props;
 		return (
 			<section id="main-section">
@@ -28,14 +31,14 @@ export class ClassSection extends Component<ClassSectionProps> {
 
 					<div className="selectors">
 						<SectionSelector
-							activeClass={activeTabState === "favourite" ? "active" : ""}
+							activeClass={activeTab === "favourite" ? "active" : ""}
 							count={favCount}
 							onClick={() => {
-								if (activeTabState !== "favourite") {
+								if (activeTab !== "favourite") {
 									this.setState({ activeTabState: "favourite" });
 									this.props.activeTab("favourite");
 								} else {
-									this.setState({ activeTabState: "none" });
+									this.setState({ activeTab: "none" });
 									this.props.activeTab("none");
 								}
 							}}
@@ -44,28 +47,28 @@ export class ClassSection extends Component<ClassSectionProps> {
 
 						<SectionSelector
 							section="unfavorited"
-							activeClass={activeTabState === "unFavourite" ? "active" : ""}
+							activeClass={activeTab === "unFavourite" ? "active" : ""}
 							count={unFavCount}
 							onClick={() => {
-								if (activeTabState !== "unFavourite") {
-									this.setState({ activeTabState: "unFavourite" });
+								if (activeTab !== "unFavourite") {
+									this.setState({ activeTab: "unFavourite" });
 									this.props.activeTab("unFavourite");
 								} else {
-									this.setState({ activeTabState: "none" });
+									this.setState({ activeTab: "none" });
 									this.props.activeTab("none");
 								}
 							}}
 						/>
 						<div
 							className={`selector ${
-								activeTabState === "create" ? "active" : ""
+								activeTab === "create" ? "active" : ""
 							}`}
 							onClick={() => {
-								if (activeTabState !== "create") {
-									this.setState({ activeTabState: "create" });
+								if (activeTab !== "create") {
+									this.setState({ activeTab: "create" });
 									this.props.activeTab("create");
 								} else {
-									this.setState({ activeTabState: "none" });
+									this.setState({ activeTab: "none" });
 									this.props.activeTab("none");
 								}
 							}}

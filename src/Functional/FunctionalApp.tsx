@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { useState } from "react";
+import {useState } from "react";
 import { FunctionalCreateDogForm } from "./FunctionalCreateDogForm";
 import { FunctionalDogs } from "./FunctionalDogs";
 import { FunctionalSection } from "./FunctionalSection";
@@ -19,7 +19,7 @@ export function FunctionalApp() {
 				<h1>pup-e-picker (Functional)</h1>
 			</header>
 			<FunctionalSection
-				tabSelectorInformation={{
+				tabSelection={{
 					activeTab(activeTab) {
 						setActiveTab(activeTab);
 					},

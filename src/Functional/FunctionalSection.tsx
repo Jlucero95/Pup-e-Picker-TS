@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 import { ActiveTab, TabSelection as TabSelectorInformation } from "../types";
 
 export const FunctionalSection = ({
-	tabSelectorInformation,
+	tabSelection,
 	children,
 }: {
-	tabSelectorInformation: TabSelectorInformation;
+	tabSelection: TabSelectorInformation;
 	children: ReactNode;
 }) => {
 	const [activeTabState, setActiveTabState] = useState<ActiveTab>("none");
 
-	const { activeTab, favCount, unFavCount } = tabSelectorInformation;
+	const { activeTab, favCount, unFavCount } = tabSelection;
 
 	const handleTabClick = (tab: ActiveTab) => {
 		if (activeTabState !== tab) {
