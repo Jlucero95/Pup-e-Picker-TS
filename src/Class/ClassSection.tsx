@@ -29,12 +29,13 @@ export class ClassSection extends Component<TabAndCountInformation> {
 					</Link>
 
 					<div className="selectors">
+						{/* Fav Selector */}
 						<SectionSelector
-							activeClass={activeTab === "favourite" ? "active" : ""}
+							activeClass={activeTab === "favourite" ? "active" : " "}
 							count={favCount}
 							onClick={() => {
 								if (activeTab !== "favourite") {
-									this.setState({ activeTabState: "favourite" });
+									this.setState({ activeTab: "favourite" });
 									this.props.activeTab("favourite");
 								} else {
 									this.setState({ activeTab: "none" });
@@ -43,7 +44,7 @@ export class ClassSection extends Component<TabAndCountInformation> {
 							}}
 							section="favorited"
 						/>
-
+						{/* UnFav Selector */}
 						<SectionSelector
 							section="unfavorited"
 							activeClass={activeTab === "unFavourite" ? "active" : ""}
@@ -58,6 +59,7 @@ export class ClassSection extends Component<TabAndCountInformation> {
 								}
 							}}
 						/>
+						{/* Create Selector */}
 						<div
 							className={`selector ${
 								activeTab === "create" ? "active" : ""

@@ -4,7 +4,6 @@ import { Requests } from "../api";
 import { getSelectedDogs } from "../Shared/GetSelectedDogs";
 import { showDogs } from "../Shared/ShowSelectedDogsList";
 
-// Right now these dogs are constant, but in reality we should be getting these from our server
 export class ClassDogs extends Component<{
 	activeTabAndSetCount: ActiveTabAndSetCount;
 }> {

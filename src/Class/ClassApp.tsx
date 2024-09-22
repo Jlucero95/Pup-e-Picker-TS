@@ -4,14 +4,9 @@ import { ClassDogs } from "./ClassDogs";
 import { ActiveTab } from "../types";
 import { ClassCreateDogForm } from "./ClassCreateDogForm";
 
-export type ClassAppState = {
-  activeTab: ActiveTab;
-  favCount: number;
-  unFavCount: number;
-};
 
 export class ClassApp extends Component<Record<string, never>> {
-  state: ClassAppState = {
+  state = {
     activeTab: "none",
     favCount: 0,
     unFavCount: 0,
@@ -40,9 +35,9 @@ export class ClassApp extends Component<Record<string, never>> {
                   this.setState({ favCount: count });
                 },
                 unFavCount: (count) => {
-                  this.setState({ favCount: count });
+                  this.setState({ unFavCount: count });
                 },
-                activeTab: activeTab,
+                activeTab: activeTab
               }}
             />
           ) : (
